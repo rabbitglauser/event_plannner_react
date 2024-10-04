@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './App.css'; // Assuming you have some CSS
@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
                 <ul className="nav-links">
                     <li><a href="/products">Events</a></li>
                     <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/stocks">stocks</a></li>
                 </ul>
             </div>
             <div className="navbar-right">
