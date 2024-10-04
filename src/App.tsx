@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './App.css'; // Assuming you have some CSS
-import logo from './logo.svg'; // If you're using a logo, keep this
+import osakaImage from './img/osaka japan.jpg'; // Change this line
+
 
 // Navbar Component
 const Navbar: React.FC = () => {
@@ -74,13 +75,60 @@ const DatePickerComponent: React.FC = () => {
     );
 };
 
-// App Component
+const Counter: React.FC = () => {
+    const [count, setCount] = useState(0);
+
+    const increment = () => {
+        setCount(count + 1);
+    };
+
+    const decrement = () => {
+        setCount(count - 1);
+    };
+
+    return (
+        <div style={{textAlign: 'center', margin: '20px'}}>
+            <button onClick={increment}>Add people to the trip</button>
+            <span style={{margin: '0 10px'}}>{count}</span>
+            <button onClick={decrement}>Remove people from the trip</button>
+        </div>
+    );
+};
+
+// ToggleText Component with the Image
+const ToggleText: React.FC = () => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    };
+
+    return (
+        <div style={{textAlign: 'center', margin: '20px'}}>
+            <button onClick={toggleVisibility}>
+                {isVisible ? 'Hide Text' : 'Find out more'}
+            </button>
+            {isVisible &&
+                <React.Fragment>
+                    <p><b>Japan is a country located in Asia. It has over 6 thousand islands and is one of the most populated countries ever recorded for its land area.</b></p>
+                    <div>
+                        <img src={osakaImage} alt="Osaka, Japan" style={{ maxWidth: '100%', height: 'auto' }} />
+                    </div>
+                </React.Fragment>
+            }
+        </div>
+    );
+};
+
+// App Component (with ToggleText included)
 const App: React.FC = () => {
     return (
         <div>
             <Navbar />
             <Description />
             <DatePickerComponent />
+            <Counter />
+            <ToggleText />
         </div>
     );
 };
