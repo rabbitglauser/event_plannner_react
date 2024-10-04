@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './App.css'; // Assuming you have some CSS
-import osakaImage from './img/osaka japan.jpg'; // Change this line
-
+import osakaImage from './img/osaka japan.jpg'; // Ensure correct import statement
 
 // Navbar Component
 const Navbar: React.FC = () => {
@@ -77,6 +76,8 @@ const DatePickerComponent: React.FC = () => {
 
 const Counter: React.FC = () => {
     const [count, setCount] = useState(0);
+    const [leftButtonColor, setLeftButtonColor] = useState("transparent");
+    const [rightButtonColor, setRightButtonColor] = useState("transparent");
 
     const increment = () => {
         setCount(count + 1);
@@ -86,11 +87,38 @@ const Counter: React.FC = () => {
         setCount(count - 1);
     };
 
+    const clickHandler = (button: 'left' | 'right', color: string) => {
+        console.log(`Clicked with color: ${color}`);
+        if (button === 'left') {
+            setLeftButtonColor(color);
+            setRightButtonColor("transparent");
+        } else {
+            setRightButtonColor(color);
+            setLeftButtonColor("transparent");
+        }
+    };
+
     return (
         <div style={{textAlign: 'center', margin: '20px'}}>
-            <button onClick={increment}>Add people to the trip</button>
+            <button
+                onClick={() => {
+                    clickHandler('left', "yellow");
+                    increment();
+                }}
+                style={{backgroundColor: leftButtonColor}}
+            >
+                Add people to the trip
+            </button>
             <span style={{margin: '0 10px'}}>{count}</span>
-            <button onClick={decrement}>Remove people from the trip</button>
+            <button
+                onClick={() => {
+                    clickHandler('right', "lightblue");
+                    decrement();
+                }}
+                style={{backgroundColor: rightButtonColor}}
+            >
+                Remove people from the trip
+            </button>
         </div>
     );
 };
@@ -104,13 +132,13 @@ const ToggleText: React.FC = () => {
     };
 
     return (
-        <div style={{textAlign: 'center', margin: '20px'}}>
+        <div style={{ textAlign: 'center', margin: '20px' }}>
             <button onClick={toggleVisibility}>
                 {isVisible ? 'Hide Text' : 'Find out more'}
             </button>
             {isVisible &&
                 <React.Fragment>
-                    <p><b>Japan is a country located in Asia. It has over 6 thousand islands and is one of the most populated countries ever recorded for its land area.</b></p>
+                    <p>Japan is a country located in Asia. It has over 6 thousand islands and is one of the most populated countries ever recorded for its land area.</p>
                     <div>
                         <img src={osakaImage} alt="Osaka, Japan" style={{ maxWidth: '100%', height: 'auto' }} />
                     </div>
